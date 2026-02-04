@@ -6,11 +6,14 @@ from google.genai import types
 import uvicorn
 import json
 import base64
-
-# --- AYARLAR ---
-API_KEY = "AIzaSyAJHFHFLBe57ubzr0Q4WDGyfYmQJGfW77M" 
+import os
 
 app = FastAPI()
+
+API_KEY = os.environ.get("GOOGLE_API_KEY")
+
+if not API_KEY:
+    print("UYARI: API Anahtarı bulunamadı! Lütfen Environment Variable ekleyin.")
 
 # Bağlantı zaman aşımlarını önlemek için CORS ayarları
 app.add_middleware(
